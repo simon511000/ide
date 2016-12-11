@@ -14,3 +14,11 @@ Edit project online may occur some security issues. Be careful!
 
 ###Demo
 ![Demo image](./demo.png)
+
+###Keyboard shortcuts
+- Save file: 
+    - Mac: **Command** + **s**
+    - Windows & others: **Ctrl** + **s**
+- Close file: 
+    - Mac: **Command** + **d**
+    - Windows & others: **Ctrl** + **d**
