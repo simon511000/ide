@@ -1,0 +1,9 @@
+{
+    "alias": "webed-ide",
+    "name": "WebEd IDE",
+    "author": "Tedozi Manson",
+    "description": "WebEd IDE",
+    "namespace": "WebEd\\Plugins\\IDE",
+    "version": "1.0",
+    "autoload": "psr-4"
+}
