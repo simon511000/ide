@@ -29,7 +29,7 @@ class IDEController extends BaseAdminController
         $this->getDashboardMenu($this->module);
         $this->setPageTitle('Code editor');
 
-        $this->rootFolder = base_path();
+        $this->rootFolder = config('webed-ide.root_folder');
     }
 
     public function getIndex()
@@ -44,7 +44,7 @@ class IDEController extends BaseAdminController
 
     public function getFileTree()
     {
-        $rslt = null;
+        $result = null;
         $node = $this->request->get('id', '/');
         if($node === '#') {
             $node = '/';
@@ -53,34 +53,34 @@ class IDEController extends BaseAdminController
         switch ($this->request->get('operation')) {
             case 'get_node':
                 $withRoot = ($this->request->get('id', '/') === '#');
-                $rslt = $this->lst($node, $withRoot);
+                $result = $this->lst($node, $withRoot);
                 break;
             case "get_content":
-                $rslt = $this->data($node);
+                $result = $this->data($node);
                 break;
             case 'create_node':
-                $rslt = $this->create($node, isset ($_GET['text']) ? $_GET['text'] : '', (!isset ($_GET['type']) || $_GET['type'] !== 'file'));
+                $result = $this->create($node, $this->request->get('text', ''), $this->request->get('type') !== 'file');
                 break;
             case 'rename_node':
-                $rslt = $this->rename($node, isset ($_GET['text']) ? $_GET['text'] : '');
+                $result = $this->rename($node, $this->request->get('text', ''));
                 break;
             case 'delete_node':
-                $rslt = $this->remove($node);
+                $result = $this->remove($node);
                 break;
             case 'move_node':
-                $parn = $this->request->get('parent', '/') !== '#' ? $this->request->get('parent', '/') : '/';
-                $rslt = $this->move($node, $parn);
+                $parent = $this->request->get('parent', '/') !== '#' ? $this->request->get('parent', '/') : '/';
+                $result = $this->move($node, $parent);
                 break;
             case 'copy_node':
-                $parn = $this->request->get('parent', '/') !== '#' ? $this->request->get('parent', '/') : '/';
-                $rslt = $this->copy($node, $parn);
+                $parent = $this->request->get('parent', '/') !== '#' ? $this->request->get('parent', '/') : '/';
+                $result = $this->copy($node, $parent);
                 break;
             default:
                 return 'Unsupported operation...';
                 break;
         }
 
-        return response()->json($rslt);
+        return response()->json($result);
     }
 
     public function postSave()

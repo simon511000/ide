@@ -34,12 +34,12 @@ trait FilesTreeTrait
     public function lst($id, $with_root = true)
     {
         $dir = $this->path($id);
-        $lst = scan_folder($dir);
-        if (!$lst) {
-            throw new Exception ('Could not list path: ' . $dir);
+        $list = scan_folder($dir);
+        if (!$list) {
+            return [];
         }
-        $res = array();
-        foreach ($lst as $item) {
+        $result = [];
+        foreach ($list as $item) {
             if ($item == '.' || $item == '..' || $item === null) {
                 continue;
             }
@@ -48,14 +48,14 @@ trait FilesTreeTrait
                 continue;
             }
             if (is_dir($dir . DIRECTORY_SEPARATOR . $item)) {
-                $res[] = [
+                $result[] = [
                     'text' => $item,
                     'children' => true,
                     'id' => $this->id($dir . DIRECTORY_SEPARATOR . $item),
                     'icon' => 'fa fa-folder'
                 ];
             } else {
-                $res[] = [
+                $result[] = [
                     'text' => $item,
                     'children' => false,
                     'id' => $this->id($dir . DIRECTORY_SEPARATOR . $item),
@@ -66,10 +66,10 @@ trait FilesTreeTrait
 
         }
         if ($with_root && $this->id($dir) === '/') {
-            $res = [
+            $result = [
                 [
                     'text' => basename($this->rootFolder),
-                    'children' => $res,
+                    'children' => $result,
                     'id' => '/',
                     'icon' => 'fa fa-folder',
                     'state' => [
@@ -80,7 +80,7 @@ trait FilesTreeTrait
             ];
 
         }
-        return $res;
+        return $result;
     }
 
     public function data($id)
