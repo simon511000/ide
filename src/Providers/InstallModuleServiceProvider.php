@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class BootstrapModuleServiceProvider extends ServiceProvider
+class InstallModuleServiceProvider extends ServiceProvider
 {
     protected $module = 'WebEd\Plugins\IDE';
 

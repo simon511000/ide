@@ -4,6 +4,6 @@
     "author": "Tedozi Manson",
     "description": "WebEd IDE",
     "namespace": "WebEd\\Plugins\\IDE",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "autoload": "psr-4"
 }
