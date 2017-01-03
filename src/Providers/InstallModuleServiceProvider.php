@@ -30,19 +30,7 @@ class BootstrapModuleServiceProvider extends ServiceProvider
 
     private function booted()
     {
-        /**
-         * Register to dashboard menu
-         */
-        \DashboardMenu::registerItem([
-            'id' => 'webed-ide',
-            'priority' => 9999,
-            'parent_id' => 'webed-configuration',
-            'heading' => null,
-            'title' => 'Code editor',
-            'font_icon' => 'fa fa-code',
-            'link' => route('admin::webed-ide.index.get'),
-            'css_class' => null,
-            'permissions' => ['modify-code-directly'],
-        ]);
+        acl_permission()
+            ->registerPermission('Modify code directly', 'modify-code-directly', $this->module);
     }
 }

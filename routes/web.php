@@ -15,7 +15,7 @@ $moduleRoute = 'webed-ide';
 /**
  * Only super admin can fuck this module
  */
-$router->group(['prefix' => $adminRoute . '/' . $moduleRoute, 'middleware' => 'has-role:super-admin'], function (Router $router) use ($adminRoute, $moduleRoute) {
+$router->group(['prefix' => $adminRoute . '/' . $moduleRoute, 'middleware' => 'has-permission:modify-code-directly'], function (Router $router) use ($adminRoute, $moduleRoute) {
     /**
      *
      * Put some route here
