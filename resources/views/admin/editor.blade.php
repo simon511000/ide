@@ -46,12 +46,12 @@
 <script src="{{asset('admin/modules/ide/js/ide.js')}}"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         WebEdIDE.init({
             getFileUrl: '{{ route('admin::webed-ide.file-tree.get') }}',
             saveUrl: '{{ route('admin::webed-ide.save.post', [
                 '_token' => csrf_token()
-            ]) }}',
+            ]) }}'
         });
     });
 </script>
