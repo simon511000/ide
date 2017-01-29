@@ -90,13 +90,13 @@ class IDEController extends BaseAdminController
         $ext = strpos($file, '.') !== FALSE ? substr($file, strrpos($file, '.') + 1) : '';
 
         if (!in_array($ext, $this->editableExt)) {
-            return response()->json(response_with_messages('File not supported', true, ERROR_CODE));
+            return response()->json(response_with_messages('File not supported', true, \Constants::ERROR_CODE));
         }
 
         $result = save_file_data($file, $content);
         if ($result === true) {
-            return response()->json(response_with_messages('File save completed', false, SUCCESS_NO_CONTENT_CODE));
+            return response()->json(response_with_messages('File save completed', false, \Constants::SUCCESS_NO_CONTENT_CODE));
         }
-        return response()->json(response_with_messages($result, true, ERROR_CODE));
+        return response()->json(response_with_messages($result, true, \Constants::ERROR_CODE));
     }
 }
