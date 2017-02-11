@@ -35,8 +35,8 @@ class BootstrapModuleServiceProvider extends ServiceProvider
          */
         \DashboardMenu::registerItem([
             'id' => 'webed-ide',
-            'priority' => 9999,
-            'parent_id' => 'webed-configuration',
+            'priority' => 999.1,
+            'parent_id' => null,
             'heading' => null,
             'title' => 'Code editor',
             'font_icon' => 'fa fa-code',

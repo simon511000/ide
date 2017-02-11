@@ -4,6 +4,6 @@
     "author": "Tedozi Manson",
     "description": "A tool for editing code directly from your browser. Remember, edit code directly is very dangerous.",
     "namespace": "WebEd\\Plugins\\IDE",
-    "version": "2.1.1",
+    "version": "3.0",
     "autoload": "psr-4"
 }

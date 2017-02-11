@@ -3,11 +3,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /**
- *
- * @var Router $router
- *
- */
-/**
  * Admin routes
  */
 $adminRoute = config('webed.admin_route');
