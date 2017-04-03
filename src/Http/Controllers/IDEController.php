@@ -1,6 +1,6 @@
 <?php namespace WebEd\Plugins\IDE\Http\Controllers;
 
-use WebEd\Base\Core\Http\Controllers\BaseAdminController;
+use WebEd\Base\Http\Controllers\BaseAdminController;
 use WebEd\Plugins\IDE\Http\Controllers\Traits\FilesTreeTrait;
 
 class IDEController extends BaseAdminController
@@ -26,14 +26,18 @@ class IDEController extends BaseAdminController
     {
         parent::__construct();
 
-        $this->getDashboardMenu($this->module);
-        $this->setPageTitle('Code editor');
-
         $this->rootFolder = config('webed-ide.root_folder');
+
+        $this->middleware(function ($request, $next) {
+            $this->getDashboardMenu($this->module);
+
+            return $next($request);
+        });
     }
 
     public function getIndex()
     {
+        $this->setPageTitle(trans('webed-ide::base.title'));
         return $this->viewAdmin('index');
     }
 
@@ -76,7 +80,7 @@ class IDEController extends BaseAdminController
                 $result = $this->copy($node, $parent);
                 break;
             default:
-                return 'Unsupported operation...';
+                return trans('webed-ide::base.unsupported_operation');
                 break;
         }
 
@@ -90,12 +94,12 @@ class IDEController extends BaseAdminController
         $ext = strpos($file, '.') !== FALSE ? substr($file, strrpos($file, '.') + 1) : '';
 
         if (!in_array($ext, $this->editableExt)) {
-            return response()->json(response_with_messages('File not supported', true, \Constants::ERROR_CODE));
+            return response()->json(response_with_messages(trans('webed-ide::base.file_not_supported'), true, \Constants::ERROR_CODE));
         }
 
         $result = save_file_data($file, $content);
         if ($result === true) {
-            return response()->json(response_with_messages('File save completed', false, \Constants::SUCCESS_NO_CONTENT_CODE));
+            return response()->json(response_with_messages(trans('webed-ide::base.file_saved'), false, \Constants::SUCCESS_NO_CONTENT_CODE));
         }
         return response()->json(response_with_messages($result, true, \Constants::ERROR_CODE));
     }

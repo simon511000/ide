@@ -9,7 +9,7 @@ trait FilesTreeTrait
         $temp = realpath($path);
 
         if (!\File::exists($temp) && !\File::isDirectory($temp)) {
-            throw new Exception ('Path does not exist: ' . $path);
+            throw new Exception (trans('webed-ide::base.path_does_not_exists') . ': ' . $path);
         }
         return $temp;
     }
@@ -94,7 +94,7 @@ trait FilesTreeTrait
             );
             return [
                 'type' => 'multiple',
-                'content' => 'Multiple selected: ' . implode(' ', $id)
+                'content' => trans('webed-ide::base.multiple_selected') . ': ' . implode(' ', $id)
             ];
         }
         $dir = $this->path($id);
@@ -114,18 +114,18 @@ trait FilesTreeTrait
             if (in_array($ext, config('webed-ide.accepted_types'))) {
                 $data['content'] = file_get_contents($dir);
             } else {
-                $data['content'] = 'File not recognized: ' . $this->id($dir);
+                $data['content'] = trans('webed-ide::base.file_not_recognized') . ': ' . $this->id($dir);
             }
             return $data;
         }
-        throw new Exception ('Not a valid selection: ' . $dir);
+        throw new Exception (trans('webed-ide::base.not_a_valid_selection') . ': ' . $dir);
     }
 
     public function create($id, $name, $mkdir = false)
     {
         $dir = $this->path($id);
         if (preg_match('([^ a-zа-я-_0-9.]+)ui', $name) || !strlen($name)) {
-            throw new Exception ('Invalid name: ' . $name);
+            throw new Exception (trans('webed-ide::base.invalid_name') . ': ' . $name);
         }
         if ($mkdir) {
             mkdir($dir . DIRECTORY_SEPARATOR . $name);
@@ -141,10 +141,10 @@ trait FilesTreeTrait
     {
         $dir = $this->path($id);
         if ($dir === $this->rootFolder) {
-            throw new Exception ('Cannot rename root');
+            throw new Exception (trans('webed-ide::base.cannot_rename_root'));
         }
         if (preg_match('([^ a-zа-я-_0-9.]+)ui', $name) || !strlen($name)) {
-            throw new Exception ('Invalid name: ' . $name);
+            throw new Exception (trans('webed-ide::base.invalid_name') . ': ' . $name);
         }
         $new = explode(DIRECTORY_SEPARATOR, $dir);
         array_pop($new);
@@ -152,7 +152,7 @@ trait FilesTreeTrait
         $new = implode(DIRECTORY_SEPARATOR, $new);
         if ($dir !== $new) {
             if (is_file($new) || is_dir($new)) {
-                throw new Exception ('Path already exists: ' . $new);
+                throw new Exception (trans('webed-ide::base.path_already_exists') . ': ' . $new);
             }
             rename($dir, $new);
         }
@@ -165,7 +165,7 @@ trait FilesTreeTrait
     {
         $dir = $this->path($id);
         if ($dir === $this->rootFolder) {
-            throw new Exception ('Cannot remove root');
+            throw new Exception (trans('webed-ide::base.cannot_remove_root'));
         }
         if (is_dir($dir)) {
             foreach (scan_folder($dir) as $f) {
@@ -202,7 +202,7 @@ trait FilesTreeTrait
         $new = array_pop($new);
         $new = $par . DIRECTORY_SEPARATOR . $new;
         if (is_file($new) || is_dir($new)) {
-            throw new Exception ('Path already exists: ' . $new);
+            throw new Exception (trans('webed-ide::base.path_already_exists') . ': ' . $new);
         }
 
         if (is_dir($dir)) {
