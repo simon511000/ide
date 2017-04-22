@@ -22,7 +22,7 @@ class BootstrapModuleMiddleware
         /**
          * Register to dashboard menu
          */
-        \DashboardMenu::registerItem([
+        dashboard_menu()->registerItem([
             'id' => 'webed-ide',
             'priority' => 999.1,
             'parent_id' => null,
