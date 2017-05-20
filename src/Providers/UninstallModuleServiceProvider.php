@@ -6,6 +6,8 @@ class UninstallModuleServiceProvider extends ServiceProvider
 {
     protected $module = 'WebEd\Plugins\IDE';
 
+    protected $moduleAlias = 'webed-ide';
+
     /**
      * Bootstrap the application services.
      *
@@ -31,6 +33,6 @@ class UninstallModuleServiceProvider extends ServiceProvider
     private function booted()
     {
         acl_permission()
-            ->unsetPermissionByModule($this->module);
+            ->unsetPermissionByModule($this->moduleAlias);
     }
 }
