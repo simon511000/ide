@@ -1,21 +1,21 @@
-#WebEd IDE
+# WebEd IDE
 An online IDE for WebEd cms.
 
-###License
+### License
 GNU GENERAL PUBLIC LICENSE
 
-####Only super admin can access.
+#### Only super admin can access.
 
-###How to use?
+### How to use?
 Go through to **Admin Dashboard** --> **Plugins** --> Enable and install this plugin.
 
-###Risks
+### Risks
 Edit project online may occur some security issues. Be careful!
 
-###Demo
+### Demo
 ![Demo image](./demo.png)
 
-###Keyboard shortcuts
+### Keyboard shortcuts
 - Save file: 
     - Mac: **Command** + **s**
     - Windows & others: **Ctrl** + **s**
